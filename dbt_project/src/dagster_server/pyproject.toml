@@ -1,0 +1,30 @@
+[project]
+name = "dagster_server"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.9,<3.14"
+dependencies = [
+    "dagster",
+    "dagster-cloud",
+    "dagster-dbt",
+    "dagster-dg-cli>=1.11.15",
+    "dagster-docker>=0.27.15",
+    "dagster-postgres>=0.27.15",
+    "dbt-core<1.11",
+    "dbt-postgres<1.11",
+    "postgres>=4.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "dagster-webserver",
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.dagster]
+module_name = "dagster_server.definitions"
+code_location_name = "dagster_server"

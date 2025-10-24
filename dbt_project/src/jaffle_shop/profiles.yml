@@ -1,0 +1,11 @@
+jaffle_shop:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: pg-dwh
+      port: 5432
+      user: admin
+      password: password
+      dbname: public
+      schema: jaffle_shop

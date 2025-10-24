@@ -1,0 +1,47 @@
+version: '3.7'
+
+services:
+  # This service runs the postgres DB used by dagster for run storage, schedule storage,
+  # and event log storage. Depending on the hardware you run this Compose on, you may be able
+  # to reduce the interval and timeout in the healthcheck to speed up your `docker-compose up` times.
+  pg-dwh:
+    image: postgres:15
+    container_name: dwh
+    environment:
+      POSTGRES_USER: 'admin'
+      POSTGRES_PASSWORD: 'password'
+      POSTGRES_DB: 'public'
+    ports:
+      - '5432:5432'
+    networks:
+      - dagster_network
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U admin -d public']
+      interval: 10s
+      timeout: 8s
+      retries: 5
+
+  # This service runs the postgres DB used by dagster for run storage, schedule storage,
+  # and event log storage. Depending on the hardware you run this Compose on, you may be able
+  # to reduce the interval and timeout in the healthcheck to speed up your `docker-compose up` times.
+  pg-dagster:
+    image: postgres:15
+    container_name: dagster_storage
+    environment:
+      POSTGRES_USER: 'admin'
+      POSTGRES_PASSWORD: 'password'
+      POSTGRES_DB: 'public'
+    ports:
+      - '5433:5432'
+    networks:
+      - dagster_network
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U admin -d public']
+      interval: 10s
+      timeout: 8s
+      retries: 5
+
+networks:
+  dagster_network:
+    driver: bridge
+    name: dagster_network

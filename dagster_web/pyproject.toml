@@ -1,0 +1,12 @@
+[project]
+name = "dagster_web"
+requires-python = ">=3.9,<3.14"
+version = "0.1.0"
+dependencies = [
+    "dagster==1.11.14",
+    "dagster-dg-cli>=1.11.14",
+    "dagster-docker>=0.27.14",
+    "dagster-graphql>=1.11.14",
+    "dagster-postgres>=0.27.14",
+    "dagster-webserver>=1.11.14",
+]
